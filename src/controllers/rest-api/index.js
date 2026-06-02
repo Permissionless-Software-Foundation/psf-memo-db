@@ -1,0 +1,29 @@
+/*
+  REST API controllers index.
+*/
+
+import LevelRESTController from './level/index.js'
+import HealthRouter from './health/index.js'
+
+class RESTControllers {
+  constructor (localConfig = {}) {
+    this.adapters = localConfig.adapters
+    this.useCases = localConfig.useCases
+    this.attachRESTControllers = this.attachRESTControllers.bind(this)
+  }
+
+  attachRESTControllers (app) {
+    const dependencies = {
+      adapters: this.adapters,
+      useCases: this.useCases
+    }
+
+    const levelRESTController = new LevelRESTController(dependencies)
+    levelRESTController.attach(app)
+
+    const healthRouter = new HealthRouter()
+    healthRouter.attach(app)
+  }
+}
+
+export default RESTControllers

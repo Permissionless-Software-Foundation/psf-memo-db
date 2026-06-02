@@ -1,0 +1,5 @@
+node_modules/
+leveldb/
+logs/
+.env
+coverage/
