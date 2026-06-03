@@ -43,4 +43,19 @@ describe('#PostQuery', () => {
 
     assert.equal(result[0].blockHeight, 0)
   })
+
+  it('should scan posts for a single address', async () => {
+    async function * mockIterator () {
+      yield ['tx1', { addr: 'addr-a', text: 'hello', seen: 1000, blockHeight: 600100 }]
+      yield ['tx2', { addr: 'addr-b', text: 'world', seen: 2000, blockHeight: 600200 }]
+      yield ['tx3', { addr: 'addr-a', text: 'again', seen: 3000, blockHeight: 600300 }]
+    }
+    postsDb.iterator.returns(mockIterator())
+
+    const result = await uut.scanPostsByAddr('addr-a')
+
+    assert.equal(result.length, 2)
+    assert.equal(result[0].txid, 'tx1')
+    assert.equal(result[1].txid, 'tx3')
+  })
 })

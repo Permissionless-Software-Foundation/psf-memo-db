@@ -27,6 +27,23 @@ class PostQuery {
 
     return posts
   }
+
+  async scanPostsByAddr (addr) {
+    const posts = []
+
+    for await (const [txid, post] of this.postsDb.iterator()) {
+      if (post.addr !== addr) continue
+      posts.push({
+        txid,
+        addr: post.addr,
+        text: post.text,
+        seen: post.seen,
+        blockHeight: post.blockHeight ?? 0
+      })
+    }
+
+    return posts
+  }
 }
 
 export default PostQuery

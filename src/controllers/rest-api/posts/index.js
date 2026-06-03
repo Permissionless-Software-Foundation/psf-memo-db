@@ -25,6 +25,7 @@ class PostsRouter {
 
   attach (app) {
     this.router.get('/recent', this.postsRESTController.getRecentPosts)
+    this.router.get('/by/:addr', this.postsRESTController.getPostsByAddr)
     app.use(this.router.routes())
     app.use(this.router.allowedMethods())
   }
