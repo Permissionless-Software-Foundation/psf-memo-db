@@ -4,6 +4,7 @@
 
 import LevelDb from './level-db.js'
 import DbBackup from './db-backup.js'
+import ProfileQuery from './profile-query.js'
 
 class Adapters {
   constructor () {
@@ -17,6 +18,10 @@ class Adapters {
     const level = this.levelDb.openDbs()
     this.level = level
     this.dbBackup = new DbBackup(level)
+    this.profileQuery = new ProfileQuery({
+      profilesDb: level.profilesDb,
+      ptxsDb: level.ptxsDb
+    })
     return true
   }
 

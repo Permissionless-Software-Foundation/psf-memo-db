@@ -4,6 +4,7 @@
 
 import LevelRESTController from './level/index.js'
 import HealthRouter from './health/index.js'
+import ProfileRouter from './profile/index.js'
 
 class RESTControllers {
   constructor (localConfig = {}) {
@@ -23,6 +24,9 @@ class RESTControllers {
 
     const healthRouter = new HealthRouter()
     healthRouter.attach(app)
+
+    const profileRouter = new ProfileRouter(dependencies)
+    profileRouter.attach(app)
   }
 }
 
