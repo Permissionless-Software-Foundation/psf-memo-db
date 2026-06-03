@@ -25,6 +25,7 @@ Default port: **5021**
 All indexer data is exposed under `/level/*` with CRUD routes per entity (`post`, `like`, `name`, `profile`, `status`, etc.) plus:
 
 - `GET /profile/recent` — paginated list of profiles, sorted by block height (newest first)
+- `GET /posts/recent` — paginated list of posts, sorted by block height (newest first)
 - `POST /level/backup` — zip database snapshot
 - `POST /level/restore` — restore from snapshot (exits process)
 - `GET /health` — health check
@@ -39,7 +40,16 @@ curl -sS "http://localhost:5021/profile/recent"
 curl -sS "http://localhost:5021/profile/recent?limit=50&offset=50"
 ```
 
-Query parameters: `limit` (default `100`, max `100`), `offset` (default `0`). Block height comes from the profile tx’s `ptx` record.
+Query parameters: `limit` (default `100`, max `100`), `offset` (default `0`). Block height is read from the stored profile document (`blockHeight` field, set at indexing time).
+
+### List recent posts
+
+```bash
+curl -sS "http://localhost:5021/posts/recent"
+curl -sS "http://localhost:5021/posts/recent?limit=50&offset=50"
+```
+
+Same query parameters as `/profile/recent`.
 
 ## Tests
 

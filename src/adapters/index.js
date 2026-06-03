@@ -20,12 +20,10 @@ class Adapters {
     this.level = level
     this.dbBackup = new DbBackup(level)
     this.profileQuery = new ProfileQuery({
-      profilesDb: level.profilesDb,
-      ptxsDb: level.ptxsDb
+      profilesDb: level.profilesDb
     })
     this.postQuery = new PostQuery({
-      postsDb: level.postsDb,
-      ptxsDb: level.ptxsDb
+      postsDb: level.postsDb
     })
     return true
   }
