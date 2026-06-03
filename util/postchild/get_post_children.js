@@ -18,9 +18,9 @@ async function getPostChildren () {
   try {
     let count = 0
 
-    for await (const [txid, child] of postChildrenDb.iterator()) {
+    for await (const [key, child] of postChildrenDb.iterator()) {
       count++
-      console.log(`${txid} = ${JSON.stringify(child, null, 2)}`)
+      console.log(`${key} = ${JSON.stringify(child, null, 2)}`)
     }
 
     console.log(`\nTotal post children: ${count}`)

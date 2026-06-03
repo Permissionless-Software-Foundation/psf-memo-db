@@ -37,7 +37,7 @@ export function makeCrudHandlers ({ dbProp, keyParam, bodyIdField, bodyDataField
 export const ENTITY_CONFIG = [
   { route: 'post', dbProp: 'postsDb', keyParam: 'txid', bodyIdField: 'txid', bodyDataField: 'postData' },
   { route: 'postparent', dbProp: 'postParentsDb', keyParam: 'txid', bodyIdField: 'txid', bodyDataField: 'parentData' },
-  { route: 'postchild', dbProp: 'postChildrenDb', keyParam: 'txid', bodyIdField: 'txid', bodyDataField: 'childData' },
+  { route: 'postchild', dbProp: 'postChildrenDb', keyParam: 'key', bodyIdField: 'key', bodyDataField: 'childData' },
   { route: 'like', dbProp: 'likesDb', keyParam: 'txid', bodyIdField: 'txid', bodyDataField: 'likeData' },
   { route: 'name', dbProp: 'namesDb', keyParam: 'addr', bodyIdField: 'addr', bodyDataField: 'nameData' },
   { route: 'profile', dbProp: 'profilesDb', keyParam: 'addr', bodyIdField: 'addr', bodyDataField: 'profileData' },
