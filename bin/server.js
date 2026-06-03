@@ -7,6 +7,8 @@ import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import convert from 'koa-convert'
 import logger from 'koa-logger'
+import mount from 'koa-mount'
+import serve from 'koa-static'
 import cors from 'kcors'
 import 'dotenv/config'
 
@@ -37,6 +39,8 @@ class Server {
       }))
       app.use(errorMiddleware())
       app.use(cors({ origin: '*' }))
+
+      app.use(mount('/', serve(`${process.cwd()}/docs`)))
 
       await this.controllers.initAdapters()
       await this.controllers.initUseCases()

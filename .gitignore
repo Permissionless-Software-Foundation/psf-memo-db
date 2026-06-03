@@ -3,3 +3,4 @@ leveldb/
 logs/
 .env
 coverage/
+docs/

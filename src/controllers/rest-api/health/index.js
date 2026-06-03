@@ -1,13 +1,16 @@
 import Router from 'koa-router'
+import HealthRESTControllerLib from './controller.js'
 
 class HealthRouter {
+  constructor () {
+    this.healthRESTController = new HealthRESTControllerLib()
+    this.router = new Router({ prefix: '/health' })
+  }
+
   attach (app) {
-    const router = new Router({ prefix: '/health' })
-    router.get('/', (ctx) => {
-      ctx.body = { status: 'ok' }
-    })
-    app.use(router.routes())
-    app.use(router.allowedMethods())
+    this.router.get('/', this.healthRESTController.getHealth)
+    app.use(this.router.routes())
+    app.use(this.router.allowedMethods())
   }
 }
 

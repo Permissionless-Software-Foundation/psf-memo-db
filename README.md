@@ -20,6 +20,8 @@ npm start
 
 Default port: **5021**
 
+API documentation is served at the root URL (`http://localhost:5021/`). Regenerate with `npm run docs`.
+
 ## API
 
 All indexer data is exposed under `/level/*` with CRUD routes per entity (`post`, `like`, `name`, `profile`, `status`, etc.) plus:

@@ -30,8 +30,29 @@ class PostsRESTControllerLib {
 
   /**
    * @api {get} /posts/recent List recent posts
+   * @apiPermission public
+   * @apiName GetRecentPosts
+   * @apiGroup REST Posts
+   *
+   * @apiDescription Returns posts sorted by block height (newest first), with seen timestamp as tie-breaker.
+   *
    * @apiQuery {Number} [limit=100] Page size (max 100)
    * @apiQuery {Number} [offset=0] Number of posts to skip after sorting
+   *
+   * @apiExample Example usage:
+   * curl -X GET "localhost:5021/posts/recent?limit=50&offset=0"
+   *
+   * @apiSuccess {Object[]} posts Array of post objects
+   * @apiSuccess {String} posts.txid Post transaction id
+   * @apiSuccess {String} posts.addr Author cash address
+   * @apiSuccess {String} posts.text Post text
+   * @apiSuccess {Number} posts.seen Unix epoch milliseconds
+   * @apiSuccess {Number} posts.blockHeight Block height when indexed
+   * @apiSuccess {Object} pagination Pagination metadata
+   * @apiSuccess {Number} pagination.limit Page size used
+   * @apiSuccess {Number} pagination.offset Offset used
+   * @apiSuccess {Number} pagination.total Total matching posts
+   * @apiSuccess {Boolean} pagination.hasMore True if more pages exist
    */
   async getRecentPosts (ctx) {
     try {

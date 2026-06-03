@@ -30,8 +30,29 @@ class ProfileRESTControllerLib {
 
   /**
    * @api {get} /profile/recent List recent profiles
+   * @apiPermission public
+   * @apiName GetRecentProfiles
+   * @apiGroup REST Profile
+   *
+   * @apiDescription Returns profiles sorted by block height (newest first), with seen timestamp as tie-breaker.
+   *
    * @apiQuery {Number} [limit=100] Page size (max 100)
    * @apiQuery {Number} [offset=0] Number of profiles to skip after sorting
+   *
+   * @apiExample Example usage:
+   * curl -X GET "localhost:5021/profile/recent?limit=50&offset=0"
+   *
+   * @apiSuccess {Object[]} profiles Array of profile objects
+   * @apiSuccess {String} profiles.addr Cash address
+   * @apiSuccess {String} profiles.text Profile message text
+   * @apiSuccess {String} profiles.txid Provenance transaction id
+   * @apiSuccess {Number} profiles.seen Unix epoch milliseconds
+   * @apiSuccess {Number} profiles.blockHeight Block height when indexed
+   * @apiSuccess {Object} pagination Pagination metadata
+   * @apiSuccess {Number} pagination.limit Page size used
+   * @apiSuccess {Number} pagination.offset Offset used
+   * @apiSuccess {Number} pagination.total Total matching profiles
+   * @apiSuccess {Boolean} pagination.hasMore True if more pages exist
    */
   async getRecentProfiles (ctx) {
     try {
