@@ -5,6 +5,7 @@
 import LevelDb from './level-db.js'
 import DbBackup from './db-backup.js'
 import ProfileQuery from './profile-query.js'
+import PostQuery from './post-query.js'
 
 class Adapters {
   constructor () {
@@ -20,6 +21,10 @@ class Adapters {
     this.dbBackup = new DbBackup(level)
     this.profileQuery = new ProfileQuery({
       profilesDb: level.profilesDb,
+      ptxsDb: level.ptxsDb
+    })
+    this.postQuery = new PostQuery({
+      postsDb: level.postsDb,
       ptxsDb: level.ptxsDb
     })
     return true

@@ -3,6 +3,7 @@
 */
 
 import ListRecentProfiles from './list-recent-profiles.js'
+import ListRecentPosts from './list-recent-posts.js'
 
 class UseCases {
   constructor (localConfig = {}) {
@@ -12,10 +13,12 @@ class UseCases {
     }
 
     this.listRecentProfiles = null
+    this.listRecentPosts = null
   }
 
   async start () {
     this.listRecentProfiles = new ListRecentProfiles({ adapters: this.adapters })
+    this.listRecentPosts = new ListRecentPosts({ adapters: this.adapters })
     console.log('Use cases initialized.')
     return true
   }
