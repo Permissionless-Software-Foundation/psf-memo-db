@@ -23,7 +23,9 @@ class Adapters {
       profilesDb: level.profilesDb
     })
     this.postQuery = new PostQuery({
-      postsDb: level.postsDb
+      postsDb: level.postsDb,
+      postParentsDb: level.postParentsDb,
+      postChildrenDb: level.postChildrenDb
     })
     return true
   }

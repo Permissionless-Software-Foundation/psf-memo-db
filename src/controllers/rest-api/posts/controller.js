@@ -35,7 +35,7 @@ class PostsRESTControllerLib {
    * @apiName GetRecentPosts
    * @apiGroup REST Posts
    *
-   * @apiDescription Returns posts sorted by block height (newest first), with seen timestamp as tie-breaker.
+   * @apiDescription Returns top-level posts only (replies excluded), sorted by block height (newest first), with seen timestamp as tie-breaker.
    *
    * @apiQuery {Number} [limit=100] Page size (max 100)
    * @apiQuery {Number} [offset=0] Number of posts to skip after sorting
@@ -49,6 +49,7 @@ class PostsRESTControllerLib {
    * @apiSuccess {String} posts.text Post text
    * @apiSuccess {Number} posts.seen Unix epoch milliseconds
    * @apiSuccess {Number} posts.blockHeight Block height when indexed
+   * @apiSuccess {Number} posts.replyCount Number of replies to this post
    * @apiSuccess {Object} pagination Pagination metadata
    * @apiSuccess {Number} pagination.limit Page size used
    * @apiSuccess {Number} pagination.offset Offset used
@@ -70,7 +71,7 @@ class PostsRESTControllerLib {
    * @apiName GetPostsByAddr
    * @apiGroup REST Posts
    *
-   * @apiDescription Returns posts for a single address sorted by block height (newest first).
+   * @apiDescription Returns top-level posts for a single address (replies excluded), sorted by block height (newest first).
    *
    * @apiParam {String} addr Author cash address
    * @apiQuery {Number} [limit=100] Page size (max 100)
@@ -85,6 +86,7 @@ class PostsRESTControllerLib {
    * @apiSuccess {String} posts.text Post text
    * @apiSuccess {Number} posts.seen Unix epoch milliseconds
    * @apiSuccess {Number} posts.blockHeight Block height when indexed
+   * @apiSuccess {Number} posts.replyCount Number of replies to this post
    * @apiSuccess {Object} pagination Pagination metadata
    */
   async getPostsByAddr (ctx) {
