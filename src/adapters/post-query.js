@@ -90,6 +90,30 @@ class PostQuery {
 
     return posts
   }
+
+  async buildReplyCountMap () {
+  const counts = new Map()
+  let total = 0
+
+  for await (const [childTxid, child] of this.postChildrenDb.iterator()) {
+    total++
+
+    console.log('Indexed reply:', {
+      childTxid,
+      child,
+      parentTxid: child?.parentTxid
+    })
+
+    const parentTxid = child?.parentTxid
+    if (!parentTxid) continue
+
+    counts.set(parentTxid, (counts.get(parentTxid) || 0) + 1)
+  }
+
+  console.log(`Total postChildrenDb records: ${total}`)
+
+  return counts
+}
 }
 
 export default PostQuery

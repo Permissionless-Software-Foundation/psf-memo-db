@@ -17,6 +17,7 @@ class PostsRESTControllerLib {
 
     this.getRecentPosts = this.getRecentPosts.bind(this)
     this.getPostsByAddr = this.getPostsByAddr.bind(this)
+    this.getPostThread = this.getPostThread.bind(this)
     this.handleError = this.handleError.bind(this)
   }
 
@@ -94,6 +95,18 @@ class PostsRESTControllerLib {
       const { addr } = ctx.params
       const { limit, offset } = ctx.query
       ctx.body = await this.useCases.listPostsByAddr.execute({ addr, limit, offset })
+    } catch (err) {
+      this.handleError(ctx, err)
+    }
+  }
+
+  async getPostThread (ctx) {
+    try {
+      const { txid } = ctx.params
+
+      ctx.body = await this.useCases.getPostThread.execute({
+        txid
+      })
     } catch (err) {
       this.handleError(ctx, err)
     }
